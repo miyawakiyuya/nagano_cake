@@ -1,0 +1,70 @@
+<h4 class="my-4"><span>注文情報確認</span></h4>
+<div class="row">
+<table border="1" width="600" height="auto">
+  <thead>
+    <th width="40%">商品名</th>
+    <th width="20%">単価(税込)</th>
+    <th width="20%">数量</th>
+    <th width="20%">小計</th>
+  </thead>
+  <tbody>
+    <% @sum = 0 %>
+    <% @cart_items.each do |cart| %>
+    <tr>
+     <td><%= attachment_image_tag cart.item,:image, :fill, 90, 50 %><%= cart.item.name %></td>
+     <td><%= cart.item.with_tax_price %></td>
+     <td><%= cart.amount %></td>
+     <td><%= cart.subtotal %></td>
+     <% @sum +=  cart.subtotal %>
+     <% end %>
+   </tr>
+  </tbody>
+</table>
+<div class = "offset-1">
+<table table border="1" width="200" height="150">
+    <tr>
+        <th width="50%">送料</th>
+        <td width="50%"><%= @postage %>円</td>
+    </tr>
+    <tr>
+        <th>商品合計</th>
+        <td><%= @sum %>円</td>
+    </tr>
+    <tr>
+        <th>請求金額</th>
+        <td><%= @sum + @postage %></td>
+    </tr>
+</table>
+</div>
+</div>
+
+<table>
+ <tr>
+  <th>お届け先</th>
+  <td>〒<%= @order.postal_code %><%= @order.address %><br>
+      <%= @order.name %>
+  </td>
+ </tr>
+ <tr>
+  <th>支払方法</th>
+  <% if @order.payment_method == "credit_card" %>
+     <td>クレジットカード</td>
+  <% else%>
+     <td>銀行振込</td>
+　<% end %>
+ </tr>
+</table>
+
+
+ <%= form_with model:@order, local:true do |f| %>
+     <%= f.hidden_field :postal_code , value: @order.postal_code %>
+     <%= f.hidden_field :address , value: @order.address %>
+     <%= f.hidden_field :name , value: @order.name %>
+     <%= f.hidden_field :customer_id , value: current_customer.id %>
+     <%= f.hidden_field :postage , value: @postage %>
+     <%= f.hidden_field :total_payment , value: @sum %>
+     <%= f.hidden_field :payment_method , value: @order.payment_method %>
+  <p><%= f.submit '注文を確定する', class: "btn btn-success" %></p>
+ <% end %>
+
+

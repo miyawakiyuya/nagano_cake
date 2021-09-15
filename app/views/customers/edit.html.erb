@@ -1,0 +1,40 @@
+<div class="row">
+	<div class="col-xs-offset-1 col-xs-8">
+		<h3 class="head-line text-center title_h2 my-3">会員情報編集</h3>
+		<%= form_with model: @customer, url: customers_path, local:true do |f| %>
+		<table class="offset-4 table">
+	  <tbody>
+     <tr>
+      <td class="info col-xs-2">氏名</td>
+      <td><%= f.text_field :first_name %>  <%= f.text_field :last_name %></td>
+     </tr>
+     <tr>
+      <td class="info col-xs-2">フリガナ</td>
+      <td><%= f.text_field :kana_first_name %>  <%= f.text_field :kana_last_name %></td>
+     </tr>
+     <tr>
+      <td class="info col-xs-2">郵便番号</td>
+      <td><%= f.text_field :postal_code %></td>
+     </tr>
+     <tr>
+      <td class="info col-xs-2">住所</td>
+      <td><%= f.text_field :residence %></td>
+     </tr><tr>
+      <td class="info col-xs-2">電話番号</td>
+      <td><%= f.text_field :phone_number %></td>
+     </tr>
+     <tr>
+      <td class="info col-xs-2">メールアドレス</td>
+      <td><%= f.email_field :email %></td>
+     </tr>
+     <tr>
+      <td class="info col-xs-2"></td>
+      <td> <%= f.submit '編集内容を保存',class:"btn btn-success" %></td>
+      <td> <%= link_to " 退会する", customers_quit_path, class: "btn btn-danger" %></td>
+     </tr>
+    </tbody>
+    </table>
+     <% end %>
+
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="container">
+<div class="row">
+	<div class="col-xs-offset-1 col-xs-8">
+		<h4 class=" my-4"><spna>商品編集</span></h4>
+		<%= form_with model: @item, url: admin_item_path, local:true do |f| %>
+		<table width="700" height="400">
+	  <tbody>
+	    <tr>
+      <td class="info col-xs-2">商品画像</td>
+      <td><%= f.attachment_field :image %></td>
+     </tr>
+     <tr>
+      <td class="info col-xs-2">商品名</td>
+      <td><%= f.text_field :name %></td>
+     </tr>
+     <tr>
+      <td class="info col-xs-2">商品説明</td>
+      <td><%= f.text_area :introduction %></td>
+     </tr>
+     <tr>
+      <td class="info col-xs-2">税抜価格</td>
+      <td><%= f.text_field :price %>円></td>
+     </tr>
+     <tr>
+      <td class="info col-xs-2">販売ステータス</td>
+      <td>
+           <%= f.radio_button :is_active, :true %>販売中　　<%= f.radio_button :is_active, :false %>販売停止中
+      </td>
+     </tr>
+     <tr>
+      <td class="info col-xs-2"></td>
+      <td> <%= f.submit '変更を保存',class:"btn btn-success" %></td>
+      <td> </td>
+     </tr>
+    </tbody>
+    </table>
+     <% end %>
+
+  </div>
+</div>
+</div>

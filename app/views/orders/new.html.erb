@@ -1,0 +1,29 @@
+<h4 class="my-4"><span>注文情報入力</span></h4>
+<h5>支払い方法</h5>
+ <%= form_with model: @order, url: orders_confirm_path, local:true do |f| %>
+  <div><%= f.radio_button :payment_method, 0 %>クレジットカード</div>
+  <div><%= f.radio_button :payment_method, 1 %>銀行振込</div>
+
+<h5 class="mt-4">お届け先</h5>
+  <div>
+    <%= f.radio_button :address_option, 0 %>ご自身の住所
+    <%= current_customer.postal_code%><%= current_customer.residence%><%= current_customer.first_name%><%= current_customer.last_name%>
+  </div>
+  <div>
+     <%= f.radio_button :address_option, 1 %>登録済住所から選択
+     <%= f.collection_select :address_id, current_customer.addresses.all, :id, :personal_information %>
+  </div>
+  <div>
+     <p><%= f.radio_button :address_option, 2 %>新しいお届け先</p>
+     <p>郵便番号<%= f.text_field :postal_code %></p>
+     <p>住所<%= f.text_field :address %></p>
+     <p>宛名<%= f.text_field :name %></p>
+  </div>
+
+  <%= f.submit '確認画面に進む', class: "btn btn-success" %>
+
+<% end %>
+
+
+
+

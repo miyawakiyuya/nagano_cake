@@ -1,0 +1,27 @@
+ <div class="row">
+ <p class="px-3 mx-auto">ようこそNaganoケーキへ！<br>
+ </strong>このサイトはケーキ販売のECサイトになります。<br>
+ 会員でない方も商品の閲覧はできますが、<br>
+ 購入には会員登録が必要になります。</p>
+ </div>
+</div>
+<h3 class="head-line text-center title_h2 mt-3"><span>新着商品</span></h3>
+<div class="row offset-1">
+<% @items.each do |item| %>
+<div class="card-group">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title"> <%= attachment_image_tag item,:image, :fill, 150, 80 %></h4>
+      <p class="card-text">
+        <%= link_to item_path(item) do %>
+        <%= item.name %>
+      <% end %>
+       </p>
+       <p class="card-text"><%= item.price %></p>
+    </div>
+  </div>
+</div>
+<% end %>
+</div>
+</div>
+

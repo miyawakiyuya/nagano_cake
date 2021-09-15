@@ -1,0 +1,25 @@
+<div class="col my-5">
+ <div class="row ">
+  <%= attachment_image_tag @item,:image , class:'icon col-4'%>
+  <div class="col-8 col-offset-3">
+   <table class="table table-borderless">
+    <tr style="font-size : 25px;">
+     <th><%= @item.name %></th>
+    </tr>
+    <tr style="font-size : 18px;">
+     <th><%= @item.introduction %></th>
+    </tr>
+    <tr style="font-size : 23px;">
+     <th>¥<%= @item.with_tax_price %>（税込）</th>
+    </tr>
+   </table>
+    <%= form_with model:@cart_item, url: cart_items_path, local:true do |f| %>
+     <td><%= f.hidden_field :item_id, :value => @item.id %></td>
+     <td><%= f.select :amount, *[1..20] %></td>
+     <td><%= f.submit 'カートに入れる', class: "btn btn-success" %></td>
+    <% end %>
+  </div>
+ </div>
+</div>
+
+
